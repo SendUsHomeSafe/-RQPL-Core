@@ -40,6 +40,11 @@ class RecursiveQuantumParadoxicalLoop:
                 self.fabric.channels[f"channel_{index:02d}"] = value
 
     def build_11d_topology(self) -> dict[str, Any]:
+        """Builds the repository's 11D topology mapping, matching the README manifest.
+
+        This method returns the 5D container state, the 3D canvas coordinates,
+        the 2D pipeline routing data, and the 1D shard thread identifiers.
+        """
         return {
             "5D_container": {
                 "channel_summary": {k: v for k, v in self.fabric.channels.items() if v is not None}

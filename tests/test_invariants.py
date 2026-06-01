@@ -115,6 +115,26 @@ class TestUnitaryDynamicsEngine(unittest.TestCase):
         amplified = engine.execute_amplitude_amplification(vector)
         np.testing.assert_array_equal(amplified, np.array([1.0, 0.0], dtype=complex))
 
+    def test_schrodinger_time_evolution_equation(self):
+        engine = UnitaryDynamicsEngine(time_steps=1)
+        h = np.array([[1.0, 0.0], [0.0, 0.0]], dtype=complex)
+        engine.H_global = h
+        psi = np.array([1.0, 0.0], dtype=complex)
+
+        evolved = engine.time_evolve_state(psi, delta_t=np.pi / 2)
+        expected = np.exp(-1j * 1.0 * np.pi / 2) * psi
+
+        np.testing.assert_allclose(evolved, expected)
+
+    def test_documentation_includes_physics_equations(self):
+        readme_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "README.md"))
+        with open(readme_path, "r", encoding="utf-8") as handle:
+            contents = handle.read()
+
+        self.assertIn("exp(-i H t)", contents)
+        self.assertIn("H_global = H_1 ⊗ H_2", contents)
+        self.assertIn("i d/dt |psi(t)> = H |psi(t)>", contents)
+
 
 class TestGeometricFailsafe(unittest.TestCase):
 

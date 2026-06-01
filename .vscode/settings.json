@@ -1,3 +1,13 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "chat.tools.terminal.autoApprove": {
+        "/^/usr/local/python/3\\.12\\.1/bin/python -m pytest -q$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^/usr/local/python/3\\.12\\.1/bin/python scripts/quantum_demo\\.py$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
